@@ -83,5 +83,111 @@
 </div>
 
 <script>(function(){var el=document.getElementById('watch-count');var n=71744;setInterval(function(){n+=Math.floor(Math.random()*17)-7;if(n<69000)n=69000;if(n>74000)n=74000;el.textContent=n.toLocaleString('en-US');},2500);var DELAY=1883;var revealed=false;function findVideo(root){try{var v=root.querySelector&&root.querySelector('video');if(v)return v;var all=root.querySelectorAll?root.querySelectorAll('*'):[];for(var i=0;i<all.length;i++){if(all[i].shadowRoot){var f=findVideo(all[i].shadowRoot);if(f)return f;}}}catch(e){}return null;}function getTime(){try{var sp=window.smartplayer;if(sp&&sp.instances&&sp.instances.length){var inst=sp.instances[0];if(typeof inst.getCurrentTime==='function'){var t=inst.getCurrentTime();if(typeof t==='number')return t;}if(inst.video&&typeof inst.video.currentTime==='number')return inst.video.currentTime;if(typeof inst.currentTime==='number')return inst.currentTime;}}catch(e){}var v=findVideo(document);if(v&&typeof v.currentTime==='number')return v.currentTime;return null;}function reveal(){if(revealed)return;revealed=true;var b=document.getElementById('buybox');b.style.display='block';b.scrollIntoView({behavior:'smooth'});}var iv=setInterval(function(){if(revealed){clearInterval(iv);return;}var t=getTime();if(t!==null&&t>=DELAY){reveal();}},400);})();</script>
+
+<!-- SCRIPT DE LEADID -->
+<script>
+(function () {
+  const POLL_MS = 500;
+  const UTM_SEP = "jLj";
+  const XCOD_SEP = "hQwK21wXxR";
+
+  const STORAGE_KEY = {
+    FB: "lead",
+    google: "lead-google",
+    tiktok: "lead-tiktok"
+  };
+
+  function getOrigin(utmSource) {
+    if (!utmSource) return null;
+
+    const base = utmSource.split(UTM_SEP)[0];
+
+    switch (base.toLowerCase()) {
+      case "fb":
+        return "FB";
+      case "google":
+        return "google";
+      case "tiktok":
+      case "tt":
+      case "tik":
+        return "tiktok";
+      default:
+        return null;
+    }
+  }
+
+  function getLeadIdFromStorage(origin) {
+    const key = STORAGE_KEY[origin];
+    if (!key) return null;
+
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+
+    try {
+      const obj = JSON.parse(raw);
+      return obj && obj._id ? String(obj._id) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function resolveLeadId(utmSource, origin) {
+    const prefix = origin + UTM_SEP;
+
+    if (utmSource && utmSource.startsWith(prefix)) {
+      const id = utmSource.slice(prefix.length);
+      if (id) return id;
+    }
+
+    return getLeadIdFromStorage(origin);
+  }
+
+  function applyIfNeeded() {
+    const url = new URL(window.location.href);
+
+    const currentSource = url.searchParams.get("utm_source");
+    const origin = getOrigin(currentSource);
+
+    if (!origin) return false;
+
+    const id = resolveLeadId(currentSource, origin);
+    if (!id) return false;
+
+    const desired = origin + UTM_SEP + id;
+    let changed = false;
+
+    if (currentSource !== desired) {
+      url.searchParams.set("utm_source", desired);
+      changed = true;
+    }
+
+    const currentXcod = url.searchParams.get("xcod");
+
+    if (currentXcod) {
+      const parts = currentXcod.split(XCOD_SEP);
+
+      if (parts[0] !== desired) {
+        parts[0] = desired;
+        url.searchParams.set("xcod", parts.join(XCOD_SEP));
+        changed = true;
+      }
+    }
+
+    if (!changed) return true;
+
+    window.location.replace(url.toString());
+    return true;
+  }
+
+  if (applyIfNeeded()) return;
+
+  const interval = setInterval(() => {
+    if (applyIfNeeded()) {
+      clearInterval(interval);
+    }
+  }, POLL_MS);
+})();
+</script>
+<!-- FIM SCRIPT DE LEADID -->
 </body>
 </html>
