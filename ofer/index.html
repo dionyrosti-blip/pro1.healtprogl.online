@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Important Health Update</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Roboto+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;}
@@ -52,205 +53,416 @@ body{
   font-weight:600;
 }
 
+/* ===============================
+   UPDATED OFFER / BUYBOX LAYOUT
+   =============================== */
 .buybox{
   display:none;
-  max-width:980px;
-  margin:40px auto 0;
-  padding:0 14px 50px;
+  width:min(1120px, calc(100vw - 24px));
+  margin:38px auto 0;
+  padding:8px 0 54px;
+  font-family:'Roboto Condensed',Arial,sans-serif;
+  color:#111;
 }
 
 .bb-title{
   text-align:center;
-  font-size:26px;
-  font-weight:800;
-  margin-bottom:26px;
-  color:#1f2937;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:38px;
+  line-height:1.15;
+  font-weight:500;
+  margin:0 0 20px;
+  color:#111;
 }
 
-.bb-title b{color:#2f6f86;}
+.bb-title b{
+  color:#1c6c7a;
+  font-weight:700;
+}
 
 .cards{
   display:flex;
   justify-content:center;
-  align-items:stretch;
-  gap:18px;
-  flex-wrap:wrap;
+  align-items:flex-start;
+  gap:20px;
+  width:100%;
+  margin:0 auto;
 }
 
 .card{
+  width:calc(33.333% - 14px);
+  max-width:350px;
+  min-height:600px;
+  margin-top:40px;
   background:#fff;
-  border:1px solid #d1d5db;
-  border-radius:14px;
-  padding:22px 18px;
-  width:300px;
+  border:2px solid #111;
+  border-radius:8px;
+  overflow:hidden;
   display:flex;
   flex-direction:column;
-  align-items:center;
-  position:relative;
+  align-items:stretch;
   text-decoration:none;
-  color:inherit;
+  color:#000;
   cursor:pointer;
-  transition:transform .15s,box-shadow .15s;
+  transition:transform .15s ease, box-shadow .15s ease;
 }
 
 .card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  transform:translateY(-2px);
+  box-shadow:0 8px 22px rgba(0,0,0,.10);
 }
 
 .card.best{
-  border:2px solid #2f6f86;
-  padding-top:0;
-  overflow:hidden;
-  box-shadow:0 8px 28px rgba(0,0,0,.12);
+  min-height:710px;
+  margin-top:0;
+  border:3px solid #0f6e7e;
+  background:#f6fdff;
 }
 
 .best-banner{
-  background:#2f6f86;
-  color:#fff;
-  font-weight:800;
-  font-size:13px;
-  letter-spacing:.5px;
   width:100%;
-  text-align:center;
-  padding:7px 0;
-  margin-bottom:18px;
-}
-
-.card.best{
-  padding-left:18px;
-  padding-right:18px;
-  padding-bottom:22px;
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#0f6e7e;
+  color:#fff;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:18px;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:.15px;
+  padding:8px 10px;
 }
 
 .card-title{
-  font-size:18px;
-  font-weight:800;
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 8px 5px;
+  font-size:25px;
+  line-height:1.05;
+  font-weight:700;
   text-align:center;
-  margin-bottom:8px;
 }
 
-.card-head{
+.card.best .card-title{
+  min-height:64px;
+  padding-top:12px;
+}
+
+.product-row{
   display:flex;
   flex-direction:column;
   align-items:center;
-  width:100%;
+  justify-content:center;
+  flex:1 0 auto;
+  padding:0 14px;
 }
 
 .pack-img{
-  max-width:215px;
-  width:100%;
+  display:block;
+  width:70%;
+  max-width:220px;
   height:auto;
+  margin:4px auto 2px;
 }
 
-.card.best .pack-img{max-width:235px;}
+.card.best .pack-img{
+  width:80%;
+  max-width:250px;
+}
+
+.price-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin:6px 0 2px;
+}
 
 .price{
-  font-size:46px;
-  font-weight:900;
-  line-height:1;
-  margin:10px 0 6px;
+  font-size:76px;
+  line-height:.95;
+  font-weight:700;
+  letter-spacing:-3px;
 }
 
 .price small{
+  display:block;
+  max-width:55px;
   font-size:16px;
-  font-weight:700;
-  color:#dc2626;
+  line-height:1.05;
+  font-weight:600;
+  letter-spacing:0;
+  text-align:left;
 }
 
 .buy{
   display:block;
-  margin:8px auto 4px;
   width:100%;
+  padding:10px 16px 0;
+  text-align:center;
 }
 
 .buy img{
+  display:block;
   width:100%;
   max-width:260px;
   height:auto;
-  display:block;
   margin:0 auto;
 }
 
 .ship{
-  color:#dc2626;
-  font-weight:800;
-  font-size:13px;
-  margin:10px 0 8px;
+  min-height:25px;
+  margin:4px 0 5px;
+  padding:0 10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+  font-size:16px;
+  line-height:1.1;
+  font-weight:700;
   text-align:center;
+  color:#d51f1f;
+}
+
+.card.best .ship{color:#3db35c;}
+
+.truck{
+  font-size:15px;
+  transform:translateY(-1px);
 }
 
 .cardflags{
-  max-width:200px;
-  width:100%;
-  height:auto;
-  margin:0 auto 10px;
   display:block;
+  width:70%;
+  max-width:215px;
+  height:auto;
+  margin:2px auto 8px;
 }
 
 .total{
-  font-size:16px;
-  font-weight:700;
-  color:#2f6f86;
+  margin:0 0 18px;
+  font-size:25px;
+  line-height:1.05;
+  font-weight:300;
   text-align:center;
+  color:#111;
 }
 
 .total .old{
-  color:#dc2626;
+  margin:0 5px;
+  color:#e32929;
   text-decoration:line-through;
-  margin:0 4px;
-  font-weight:700;
+  text-decoration-thickness:2px;
+  font-weight:300;
 }
 
 .total .new{
-  color:#1f2937;
-  font-weight:800;
+  color:#111;
+  font-weight:700;
 }
 
 .seals{
   text-align:center;
-  margin:34px auto 0;
+  margin:20px auto 0;
 }
 
 .seals img{
-  max-width:520px;
+  display:block;
   width:100%;
+  max-width:398px;
   height:auto;
+  margin:0 auto;
 }
 
 .usa{
+  max-width:760px;
+  margin:10px auto 0;
+  padding:0 14px;
   text-align:center;
-  font-size:12px;
-  color:#6b7280;
-  max-width:680px;
-  margin:16px auto 0;
-  line-height:1.5;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:11px;
+  line-height:1.45;
+  font-weight:500;
+  color:#5b9c91;
+}
+
+/* 60-day guarantee block — kept inside buybox so it follows the same VSL delay */
+.guarantee-box{
+  max-width:920px;
+  margin:52px auto 0;
+  padding:20px 20px 30px;
+  background:#fff;
+  border-radius:12px;
+  text-align:left;
+}
+
+.guarantee-badge{
+  display:block;
+  width:130px;
+  max-width:34vw;
+  height:auto;
+  margin:0 auto 10px;
+}
+
+.guarantee-title{
+  margin:0 0 24px;
+  padding:0 10px;
+  text-align:center;
+  text-transform:uppercase;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:30px;
+  line-height:1.25;
+  font-weight:600;
+  color:#997c33;
+}
+
+.guarantee-copy{
+  padding:0 20px;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:13px;
+  line-height:1.55;
+  font-weight:400;
+  color:#1a1616;
+}
+
+.guarantee-copy p{margin:0 0 15px;}
+
+.guarantee-signoff{margin-top:22px;}
+
+.guarantee-signature{
+  display:inline-block;
+  margin-top:2px;
+  font-family:'Brush Script MT','Segoe Script',cursive;
+  font-size:38px;
+  line-height:1;
+  font-weight:400;
+  color:#141414;
 }
 
 @media(max-width:760px){
-  .bb-title{font-size:21px;}
+  .buybox{
+    width:min(100% - 20px, 520px);
+    margin-top:28px;
+    padding-bottom:38px;
+  }
+
+  .bb-title{
+    font-size:28px;
+    line-height:1.2;
+    margin-bottom:18px;
+    padding:0 8px;
+  }
+
   .cards{
     flex-direction:column;
     align-items:center;
+    gap:18px;
   }
-  .card.best{order:-1;}
-  .card{
+
+  .card,
+  .card.best{
     width:100%;
-    max-width:460px;
+    max-width:500px;
+    min-height:0;
+    margin-top:0;
   }
-  .card-head{
-    flex-direction:row;
-    justify-content:center;
-    gap:14px;
+
+  .card.best{order:-1;}
+
+  .best-banner{
+    min-height:34px;
+    font-size:17px;
   }
+
+  .card-title,
+  .card.best .card-title{
+    min-height:0;
+    padding:12px 8px 4px;
+    font-size:22px;
+  }
+
+  .product-row{
+    display:grid;
+    grid-template-columns:minmax(125px, 1.12fr) minmax(115px, .88fr);
+    align-items:center;
+    gap:6px;
+    width:100%;
+    padding:0 12px;
+  }
+
   .pack-img,
   .card.best .pack-img{
-    max-width:165px;
+    width:100%;
+    max-width:200px;
+    margin:6px auto;
   }
-  .price{
-    font-size:42px;
+
+  .price-wrap{
+    align-items:center;
+    gap:5px;
     margin:0;
   }
+
+  .price{font-size:60px;}
+
+  .price small{
+    font-size:14px;
+    max-width:45px;
+  }
+
+  .buy{padding-top:3px;}
+  .buy img{max-width:230px;}
+  .ship{font-size:14px;margin-top:3px;}
+  .cardflags{max-width:200px;margin-bottom:5px;}
+  .total{font-size:21px;margin-bottom:14px;}
+
+  .seals{margin-top:18px;}
+  .seals img{max-width:330px;}
+
+  .usa{
+    max-width:480px;
+    font-size:10px;
+    padding:0 10px;
+  }
+
+  .guarantee-box{
+    margin-top:38px;
+    padding:18px 12px 24px;
+    border-radius:10px;
+  }
+
+  .guarantee-badge{
+    width:104px;
+    max-width:32vw;
+  }
+
+  .guarantee-title{
+    margin-bottom:18px;
+    padding:0 4px;
+    font-size:22px;
+  }
+
+  .guarantee-copy{
+    padding:0 8px;
+    font-size:12px;
+    line-height:1.5;
+  }
+
+  .guarantee-signature{font-size:33px;}
+}
+
+@media(max-width:390px){
+  .product-row{
+    grid-template-columns:minmax(108px,1.05fr) minmax(105px,.95fr);
+    padding:0 8px;
+  }
+  .price{font-size:54px;}
+  .pack-img,.card.best .pack-img{max-width:170px;}
 }
 </style>
 
@@ -380,6 +592,8 @@ body{
 </div>
 
 
+</div><!-- /.vsl-wrap -->
+
 <div class="buybox" id="buybox">
 
   <div class="bb-title">
@@ -388,6 +602,7 @@ body{
 
   <div class="cards">
 
+    <!-- 2 PACK -->
     <a
       class="card smartplayer-click-event"
       href="https://lifebalancepeak.com/b?p=GPP2V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522"
@@ -396,23 +611,24 @@ body{
 
       <div class="card-title">2 PACK • 60 DAYS</div>
 
-      <div class="card-head">
+      <div class="product-row">
         <img
           class="pack-img"
           src="https://cdn.elasticfunnels.io/132/assets/patches/2_GLPATCHES.png"
           alt="2 PACK • 60 DAYS">
 
-        <div class="price">
-          $79 <small>/ pack</small>
+        <div class="price-wrap">
+          <div class="price">$79</div>
+          <small>/ pack</small>
         </div>
       </div>
 
-      <span class="buy">
+      <span class="buy smartplayer-click-event">
         <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
           Add to cart
         </span>
-
         <img
+          class="smartplayer-click-event"
           src="https://cdn.elasticfunnels.io/132/assets/media/GLProButton2.png"
           alt="Add to cart">
       </span>
@@ -429,10 +645,10 @@ body{
         <span class="old">$254</span>
         <span class="new">$158</span>
       </div>
-
     </a>
 
 
+    <!-- 6 PACK / BEST VALUE -->
     <a
       class="card best smartplayer-click-event"
       href="https://lifebalancepeak.com/b?p=GPP6V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522"
@@ -440,36 +656,32 @@ body{
       rel="noopener">
 
       <div class="best-banner">BEST VALUE</div>
-
       <div class="card-title">6 PACK • 180 DAYS</div>
 
-      <div class="card-head">
-
+      <div class="product-row">
         <img
           class="pack-img"
           src="https://cdn.elasticfunnels.io/132/assets/patches/6_GLPATCHES.png"
           alt="6 PACK • 180 DAYS">
 
-        <div class="price">
-          $49 <small>/ pack</small>
+        <div class="price-wrap">
+          <div class="price">$49</div>
+          <small>/ pack</small>
         </div>
-
       </div>
 
-      <span class="buy">
-
+      <span class="buy smartplayer-click-event">
         <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
           Add to cart
         </span>
-
         <img
+          class="smartplayer-click-event"
           src="https://cdn.elasticfunnels.io/132/assets/media/Group%20781.png"
           alt="Add to cart">
-
       </span>
 
       <div class="ship">
-        + FREE US SHIPPING!
+        + FREE FAST US SHIPPING! <span class="truck" aria-hidden="true">🚚</span>
       </div>
 
       <img
@@ -482,48 +694,41 @@ body{
         <span class="old">$762</span>
         <span class="new">$294</span>
       </div>
-
     </a>
 
 
+    <!-- 3 PACK -->
     <a
       class="card smartplayer-click-event"
       href="https://lifebalancepeak.com/b?p=GPP3V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522"
       target="_blank"
       rel="noopener">
 
-      <div class="card-title">
-        3 PACK • 90 DAYS
-      </div>
+      <div class="card-title">3 PACK • 90 DAYS</div>
 
-      <div class="card-head">
-
+      <div class="product-row">
         <img
           class="pack-img"
           src="https://cdn.elasticfunnels.io/132/assets/patches/3_GLPATCHES.png"
           alt="3 PACK • 90 DAYS">
 
-        <div class="price">
-          $69 <small>/ pack</small>
+        <div class="price-wrap">
+          <div class="price">$69</div>
+          <small>/ pack</small>
         </div>
-
       </div>
 
-      <span class="buy">
-
+      <span class="buy smartplayer-click-event">
         <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
           Add to cart
         </span>
-
         <img
+          class="smartplayer-click-event"
           src="https://cdn.elasticfunnels.io/132/assets/media/GLProButton2.png"
           alt="Add to cart">
-
       </span>
 
-      <div class="ship">
-        + SHIPPING
-      </div>
+      <div class="ship">+ SHIPPING</div>
 
       <img
         class="cardflags"
@@ -535,11 +740,9 @@ body{
         <span class="old">$381</span>
         <span class="new">$207</span>
       </div>
-
     </a>
 
   </div>
-
 
   <div class="seals">
     <img
@@ -552,8 +755,33 @@ body{
     premium ingredients sourced from around the world.
   </div>
 
-</div>
+  <section class="guarantee-box" aria-label="60-day money-back guarantee">
+    <img
+      class="guarantee-badge"
+      src="https://storage.googleapis.com/download/storage/v1/b/asper-digital/o/1%2Fmedia%2FE7JAROAGZBRMEOBX.webp?alt=media&amp;generation=1708000145505835"
+      alt="60 Days Money Back Guarantee">
 
+    <h2 class="guarantee-title">100% Satisfaction 60-Day Money Back Guarantee</h2>
+
+    <div class="guarantee-copy">
+      <p><strong>Your purchase is secured by a 60-day 100% money-back guarantee.</strong></p>
+
+      <p>
+        If GLPro does not meet your expectations, if the results you anticipated fail to materialize,
+        or if you decide you want a refund for absolutely any reason, just drop me an email or call our
+        toll-free line. I promise you'll get back EVERY PENNY you spent within 48 hours.
+      </p>
+
+      <p>Absolutely no questions asked!</p>
+
+      <p class="guarantee-signoff">
+        Sincerely,<br>
+        <span class="guarantee-signature">GLPro Team</span>
+      </p>
+    </div>
+  </section>
+
+</div>
 
 <script>
 (function(){
