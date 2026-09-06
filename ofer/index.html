@@ -55,7 +55,7 @@ body{
    UPDATED OFFER / BUYBOX LAYOUT
    =============================== */
 .buybox{
-  display:none;
+  display:block;
   width:min(1120px, calc(100vw - 24px));
   margin:38px auto 0;
   padding:8px 0 54px;
@@ -501,7 +501,9 @@ body{
 <script src="js/latest.js" data-utmify-prevent-xcod-sck="" async="" defer="">
 </script>
 
-<script src="js/player.js" async=""></script></head>
+<script src="js/player.js" async=""></script>
+<style id="sem-delay-override">#buybox{display:block!important;}</style>
+</head>
 
 <body>
 
@@ -742,128 +744,6 @@ body{
     el.textContent=n.toLocaleString('en-US');
 
   },2500);
-
-
-  var DELAY=1883;
-  var revealed=false;
-
-
-  function findVideo(root){
-
-    try{
-
-      var v=root.querySelector&&root.querySelector('video');
-
-      if(v)return v;
-
-      var all=root.querySelectorAll
-        ?root.querySelectorAll('*')
-        :[];
-
-      for(var i=0;i<all.length;i++){
-
-        if(all[i].shadowRoot){
-
-          var f=findVideo(all[i].shadowRoot);
-
-          if(f)return f;
-
-        }
-
-      }
-
-    }catch(e){}
-
-    return null;
-
-  }
-
-
-  function getTime(){
-
-    try{
-
-      var sp=window.smartplayer;
-
-      if(sp&&sp.instances&&sp.instances.length){
-
-        var inst=sp.instances[0];
-
-        if(typeof inst.getCurrentTime==='function'){
-
-          var t=inst.getCurrentTime();
-
-          if(typeof t==='number')return t;
-
-        }
-
-        if(
-          inst.video &&
-          typeof inst.video.currentTime==='number'
-        ){
-          return inst.video.currentTime;
-        }
-
-        if(typeof inst.currentTime==='number'){
-          return inst.currentTime;
-        }
-
-      }
-
-    }catch(e){}
-
-
-    var v=findVideo(document);
-
-    if(
-      v &&
-      typeof v.currentTime==='number'
-    ){
-      return v.currentTime;
-    }
-
-    return null;
-
-  }
-
-
-  function reveal(){
-
-    if(revealed)return;
-
-    revealed=true;
-
-    var b=document.getElementById('buybox');
-
-    b.style.display='block';
-
-    b.scrollIntoView({
-      behavior:'smooth'
-    });
-
-  }
-
-
-  var iv=setInterval(function(){
-
-    if(revealed){
-
-      clearInterval(iv);
-      return;
-
-    }
-
-    var t=getTime();
-
-    if(
-      t!==null &&
-      t>=DELAY
-    ){
-      reveal();
-    }
-
-  },400);
-
 })();
 </script>
 
