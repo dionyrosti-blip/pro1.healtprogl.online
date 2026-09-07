@@ -726,7 +726,7 @@ body{
   <div class="cards">
 
     <!-- 2 PACK -->
-    <a class="card smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP2V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522" target="_blank" rel="noopener">
+    <a class="card smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP2V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522">
 
       <div class="card-title">2 PACK • 60 DAYS</div>
 
@@ -739,11 +739,11 @@ body{
         </div>
       </div>
 
-      <span class="buy smartplayer-click-event">
+      <span class="buy">
         <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
           Add to cart
         </span>
-        <img class="smartplayer-click-event" src="images/GLProButton2.png" alt="Add to cart">
+        <img src="images/GLProButton2.png" alt="Add to cart">
       </span>
 
       <div class="ship">+ SHIPPING</div>
@@ -758,7 +758,7 @@ body{
 
 
     <!-- 6 PACK / BEST VALUE -->
-    <a class="card best smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP6V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522" target="_blank" rel="noopener">
+    <a class="card best smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP6V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522">
 
       <div class="best-banner">BEST VALUE</div>
       <div class="card-title">6 PACK • 180 DAYS</div>
@@ -776,11 +776,11 @@ body{
         </div>
       </div>
 
-      <span class="buy smartplayer-click-event">
+      <span class="buy">
         <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
           Add to cart
         </span>
-        <img class="smartplayer-click-event" src="images/Group%20781.png" alt="Add to cart">
+        <img src="images/Group%20781.png" alt="Add to cart">
       </span>
 
       <div class="ship">
@@ -797,7 +797,7 @@ body{
 
 
     <!-- 3 PACK -->
-    <a class="card smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP3V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522" target="_blank" rel="noopener">
+    <a class="card smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP3V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522">
 
       <div class="card-title">3 PACK • 90 DAYS</div>
 
@@ -810,11 +810,11 @@ body{
         </div>
       </div>
 
-      <span class="buy smartplayer-click-event">
+      <span class="buy">
         <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
           Add to cart
         </span>
-        <img class="smartplayer-click-event" src="images/GLProButton2.png" alt="Add to cart">
+        <img src="images/GLProButton2.png" alt="Add to cart">
       </span>
 
       <div class="ship">+ SHIPPING</div>
@@ -880,126 +880,100 @@ body{
   },2500);
 
 
+  // Oferta sincronizada com o tempo REAL do VTurb.
+  // 1883 segundos = 31:23.
   var DELAY=1883;
   var revealed=false;
-
-
-  function findVideo(root){
-
-    try{
-
-      var v=root.querySelector&&root.querySelector('video');
-
-      if(v)return v;
-
-      var all=root.querySelectorAll
-        ?root.querySelectorAll('*')
-        :[];
-
-      for(var i=0;i<all.length;i++){
-
-        if(all[i].shadowRoot){
-
-          var f=findVideo(all[i].shadowRoot);
-
-          if(f)return f;
-
-        }
-
-      }
-
-    }catch(e){}
-
-    return null;
-
-  }
-
-
-  function getTime(){
-
-    try{
-
-      var sp=window.smartplayer;
-
-      if(sp&&sp.instances&&sp.instances.length){
-
-        var inst=sp.instances[0];
-
-        if(typeof inst.getCurrentTime==='function'){
-
-          var t=inst.getCurrentTime();
-
-          if(typeof t==='number')return t;
-
-        }
-
-        if(
-          inst.video &&
-          typeof inst.video.currentTime==='number'
-        ){
-          return inst.video.currentTime;
-        }
-
-        if(typeof inst.currentTime==='number'){
-          return inst.currentTime;
-        }
-
-      }
-
-    }catch(e){}
-
-
-    var v=findVideo(document);
-
-    if(
-      v &&
-      typeof v.currentTime==='number'
-    ){
-      return v.currentTime;
-    }
-
-    return null;
-
-  }
-
+  var officialInitialized=false;
+  var fallbackAttached=false;
+  var player=document.getElementById('vid-6a83a9cf54b1bb805633abc1');
 
   function reveal(){
-
     if(revealed)return;
-
     revealed=true;
 
     var b=document.getElementById('buybox');
-
-    b.style.display='block';
-
-
-    b.scrollIntoView({
-      behavior:'smooth'
-    });
-
+    if(b)b.style.display='block';
+    // Intencionalmente SEM scrollIntoView: o visitante permanece no video.
   }
 
+  // Metodo oficial atual do VTurb. Mantem o conteudo sincronizado
+  // com o tempo do video (inclusive pausas e recursos de velocidade/Turbo).
+  function setupOfficialDelay(){
+    if(officialInitialized)return true;
+    if(!player || typeof player.displayHiddenElements!=='function')return false;
 
-  var iv=setInterval(function(){
+    try{
+      player.displayHiddenElements(DELAY,['#buybox'],{persist:true});
+      officialInitialized=true;
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
 
-    if(revealed){
+  function onPlayerReady(){
+    setupOfficialDelay();
+    attachTimeupdateFallback();
+  }
 
-      clearInterval(iv);
-      return;
+  if(player){
+    player.addEventListener('player:ready',onPlayerReady);
+  }
 
+  // Tambem escuta o evento global para cobrir o caso de o player
+  // terminar a inicializacao por outro caminho.
+  document.addEventListener('player:ready',function(event){
+    var eventPlayer=event && event.detail && event.detail.player;
+    if(eventPlayer && player && eventPlayer.id && eventPlayer.id!==player.id)return;
+    onPlayerReady();
+  });
+
+  // Fallback documentado pelo VTurb: acompanha o currentTime real
+  // do video. Nao usa cronometro da pagina, portanto nao adianta
+  // a oferta se o visitante pausar o video.
+  function attachTimeupdateFallback(){
+    if(fallbackAttached)return true;
+
+    try{
+      var sp=window.smartplayer;
+      if(!(sp && sp.instances && sp.instances.length))return false;
+
+      var inst=sp.instances[0];
+      if(!inst || typeof inst.on!=='function')return false;
+
+      fallbackAttached=true;
+      inst.on('timeupdate',function(){
+        if(revealed)return;
+
+        var current=null;
+        if(inst.video && typeof inst.video.currentTime==='number'){
+          current=inst.video.currentTime;
+        }else if(typeof inst.currentTime==='number'){
+          current=inst.currentTime;
+        }
+
+        if(current!==null && current>=DELAY){
+          reveal();
+        }
+      });
+
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
+  // Se o script do VTurb ainda estiver carregando, continua tentando
+  // conectar o fallback. Para assim que conseguir.
+  var fallbackPoll=setInterval(function(){
+    if(attachTimeupdateFallback()){
+      clearInterval(fallbackPoll);
     }
 
-    var t=getTime();
-
-    if(
-      t!==null &&
-      t>=DELAY
-    ){
-      reveal();
-    }
-
-  },400);
+    // Caso o metodo oficial ja esteja disponivel, registra o delay tambem.
+    setupOfficialDelay();
+  },1000);
 
 })();
 </script>
@@ -1211,7 +1185,11 @@ body{
       return true;
 
 
-    window.location.replace(
+    // Atualiza os parametros na barra de endereco sem navegar/recarregar.
+    // Isso preserva o estado e o tempo atual da VSL.
+    window.history.replaceState(
+      window.history.state,
+      document.title,
       url.toString()
     );
 
