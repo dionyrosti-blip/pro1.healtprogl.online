@@ -1337,4 +1337,42 @@ body{
 <!-- FIM SCRIPT DE LEADID -->
 
 
+
+<!-- NEWSBREAK CLICK ID -> BUYGOODS SUBID5 -->
+<script>
+(function () {
+  function getNewsBreakClickId() {
+    try {
+      return new URL(window.location.href).searchParams.get("nbcid");
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function addNewsBreakSubId(link) {
+    var nbcid = getNewsBreakClickId();
+    if (!nbcid || !link) return;
+
+    try {
+      var url = new URL(link.href, window.location.href);
+
+      if (url.hostname !== "lifebalancepeak.com" || url.pathname !== "/b") return;
+
+      url.searchParams.set("subid5", nbcid);
+      link.href = url.toString();
+    } catch (e) {}
+  }
+
+  // Aplica imediatamente aos links dos potes.
+  document.querySelectorAll('a[href*="lifebalancepeak.com/b"]').forEach(addNewsBreakSubId);
+
+  // Garante o SUBID5 no momento do clique caso outro script tenha atualizado o link depois.
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest && event.target.closest('a[href*="lifebalancepeak.com/b"]');
+    if (link) addNewsBreakSubId(link);
+  }, true);
+})();
+</script>
+<!-- FIM NEWSBREAK CLICK ID -> BUYGOODS SUBID5 -->
+
 </body></html>
