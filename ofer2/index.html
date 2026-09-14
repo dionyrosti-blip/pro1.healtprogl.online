@@ -295,6 +295,27 @@ body{
   defer>
 </script>
 
+<!-- META PIXEL START -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1045135948136320');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent');
+</script>
+<!-- META PIXEL END -->
+
+<!-- BUYGOODS FACEBOOK LINK MANAGER START -->
+<script type="text/javascript" src="https://buygoods.com/js/facebook_link_manager.js"></script>
+<!-- BUYGOODS FACEBOOK LINK MANAGER END -->
+
 </head>
 
 <body>
@@ -377,7 +398,7 @@ body{
 
     <a
       class="card smartplayer-click-event"
-      href="https://lifebalancepeak.com/b?p=GPP2V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522"
+      href="https://lifebalancepeak.com/b?p=GPP2V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522&amp;fb=1"
       target="_blank"
       rel="noopener">
 
@@ -422,7 +443,7 @@ body{
 
     <a
       class="card best smartplayer-click-event"
-      href="https://lifebalancepeak.com/b?p=GPP6V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522"
+      href="https://lifebalancepeak.com/b?p=GPP6V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522&amp;fb=1"
       target="_blank"
       rel="noopener">
 
@@ -475,7 +496,7 @@ body{
 
     <a
       class="card smartplayer-click-event"
-      href="https://lifebalancepeak.com/b?p=GPP3V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522"
+      href="https://lifebalancepeak.com/b?p=GPP3V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522&amp;fb=1"
       target="_blank"
       rel="noopener">
 
@@ -921,6 +942,28 @@ body{
 </script>
 
 <!-- FIM SCRIPT DE LEADID -->
+
+<!-- META INITIATE CHECKOUT ON BUY BUTTON CLICK START -->
+<script>
+(function () {
+  var lastICAt = 0;
+
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest && event.target.closest('a[href*="lifebalancepeak.com/b"]');
+    if (!link) return;
+
+    /* Evita disparos duplicados pelo mesmo clique/toque. */
+    var now = Date.now();
+    if (now - lastICAt < 1500) return;
+    lastICAt = now;
+
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'InitiateCheckout');
+    }
+  }, true);
+})();
+</script>
+<!-- META INITIATE CHECKOUT ON BUY BUTTON CLICK END -->
 
 </body>
 </html>
