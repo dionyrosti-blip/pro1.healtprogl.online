@@ -1,1 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Blood Sugar Fundamentals | Educational Program</title>
+  <meta name="description" content="A practical educational program about blood sugar, daily habits, nutrition basics, movement, sleep, and informed conversations with healthcare professionals.">
+  <style>
+    :root{
+      --navy:#0b1f33;
+      --navy-2:#123552;
+      --blue:#1f6f8b;
+      --teal:#2e8f8a;
+      --light:#f5f8fb;
+      --white:#ffffff;
+      --text:#17212b;
+      --muted:#607080;
+      --line:#dfe7ee;
+      --green:#2f7d5d;
+      --shadow:0 18px 50px rgba(11,31,51,.10);
+      --radius:20px;
+    }
 
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:var(--white);
+      line-height:1.6;
+    }
+
+    a{color:inherit}
+    .container{width:min(1120px, calc(100% - 40px)); margin:0 auto}
+
+    .topbar{
+      background:var(--navy);
+      color:#dfeaf4;
+      font-size:14px;
+      text-align:center;
+      padding:10px 16px;
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,255,255,.96);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav-inner{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:-.4px;
+      color:var(--navy);
+      font-size:20px;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:22px;
+      font-size:14px;
+      color:#425466;
+    }
+
+    .nav-links a{text-decoration:none}
+    .nav-links a:hover{color:var(--blue)}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:0 24px;
+      border-radius:12px;
+      background:var(--navy);
+      color:#fff;
+      text-decoration:none;
+      font-weight:800;
+      border:1px solid var(--navy);
+      transition:.2s ease;
+      box-shadow:0 8px 24px rgba(11,31,51,.16);
+    }
+
+    .btn:hover{transform:translateY(-1px); background:var(--navy-2)}
+    .btn.secondary{background:#fff;color:var(--navy);box-shadow:none}
+    .btn.secondary:hover{background:#f8fbfd}
+
+    .hero{
+      background:
+        radial-gradient(circle at 85% 20%, rgba(46,143,138,.14), transparent 32%),
+        linear-gradient(180deg, #f8fbfd 0%, #ffffff 100%);
+      padding:84px 0 70px;
+      border-bottom:1px solid #edf2f6;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:56px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--teal);
+      background:#eaf7f5;
+      padding:8px 11px;
+      border-radius:999px;
+      margin-bottom:20px;
+    }
+
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(42px, 5vw, 68px);
+      line-height:1.03;
+      letter-spacing:-2.4px;
+      color:var(--navy);
+    }
+
+    .hero p{
+      font-size:19px;
+      color:#4b5c6c;
+      max-width:720px;
+      margin:0 0 28px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:22px;
+    }
+
+    .microcopy{
+      font-size:13px;
+      color:#6b7885;
+      max-width:680px;
+    }
+
+    .program-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+      padding:28px;
+    }
+
+    .program-visual{
+      border-radius:20px;
+      min-height:260px;
+      background:
+        linear-gradient(140deg, rgba(255,255,255,.12), rgba(255,255,255,0)),
+        linear-gradient(145deg, var(--navy), var(--blue) 55%, var(--teal));
+      color:#fff;
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .program-visual small{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      opacity:.78;
+      font-weight:700;
+    }
+
+    .program-visual h2{
+      margin:8px 0 10px;
+      font-size:34px;
+      line-height:1.08;
+      letter-spacing:-1px;
+    }
+
+    .program-visual p{
+      margin:0;
+      font-size:15px;
+      line-height:1.5;
+      color:#eaf2f7;
+    }
+
+    .mini-list{
+      list-style:none;
+      padding:0;
+      margin:22px 0 0;
+      display:grid;
+      gap:10px;
+    }
+
+    .mini-list li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      font-size:14px;
+      color:#445361;
+    }
+
+    .check{
+      flex:0 0 22px;
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      background:#eaf7f1;
+      color:var(--green);
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-size:13px;
+      margin-top:1px;
+    }
+
+    .trust{
+      padding:28px 0;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+
+    .trust-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .trust-item{
+      text-align:center;
+      border-right:1px solid var(--line);
+      padding:6px 14px;
+    }
+
+    .trust-item:last-child{border-right:0}
+    .trust-item strong{display:block;color:var(--navy);font-size:15px}
+    .trust-item span{display:block;color:#71808d;font-size:12px;margin-top:2px}
+
+    section{padding:82px 0}
+    .soft{background:var(--light)}
+
+    .section-head{
+      max-width:780px;
+      margin:0 auto 44px;
+      text-align:center;
+    }
+
+    .section-head h2{
+      margin:0 0 12px;
+      color:var(--navy);
+      font-size:clamp(32px,4vw,46px);
+      line-height:1.1;
+      letter-spacing:-1.4px;
+    }
+
+    .section-head p{margin:0;color:var(--muted);font-size:17px}
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:25px;
+      box-shadow:0 8px 30px rgba(11,31,51,.05);
+    }
+
+    .card-number{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      background:#eaf4f8;
+      color:var(--blue);
+      font-weight:900;
+      margin-bottom:18px;
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      color:var(--navy);
+      font-size:20px;
+      line-height:1.25;
+    }
+
+    .card p{margin:0;color:#5f6f7d;font-size:15px}
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+    }
+
+    .split h2{
+      margin:0 0 16px;
+      color:var(--navy);
+      font-size:42px;
+      line-height:1.12;
+      letter-spacing:-1.3px;
+    }
+
+    .split p{color:#5a6a78}
+
+    .info-panel{
+      padding:28px;
+      background:#f8fbfc;
+      border:1px solid #dce8ee;
+      border-radius:22px;
+    }
+
+    .info-panel h3{margin:0 0 12px;color:var(--navy)}
+    .info-panel ul{margin:0;padding-left:20px;color:#4f6070}
+    .info-panel li{margin:9px 0}
+
+    .warning{
+      border-left:4px solid #d29a39;
+      background:#fff9ed;
+      border-radius:12px;
+      padding:18px 18px 18px 20px;
+      color:#6c552a;
+      font-size:14px;
+      margin-top:20px;
+    }
+
+    .offer{
+      background:linear-gradient(135deg,var(--navy),#143f60);
+      color:#fff;
+      border-radius:28px;
+      padding:46px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:34px;
+      align-items:center;
+      box-shadow:0 24px 60px rgba(11,31,51,.18);
+    }
+
+    .offer h2{
+      margin:0 0 10px;
+      font-size:38px;
+      line-height:1.1;
+      letter-spacing:-1px;
+    }
+
+    .offer p{margin:0;color:#d7e5ef;max-width:720px}
+    .offer .btn{background:#fff;color:var(--navy);border-color:#fff;box-shadow:none}
+    .offer .btn:hover{background:#f3f7fa}
+
+    .faq{
+      max-width:860px;
+      margin:0 auto;
+      display:grid;
+      gap:14px;
+    }
+
+    details{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+      padding:18px 20px;
+    }
+
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      color:var(--navy);
+    }
+
+    details p{margin:12px 0 0;color:#5c6d7c;font-size:15px}
+
+    .legal{
+      background:#f7f9fb;
+      border-top:1px solid var(--line);
+      padding:62px 0 40px;
+    }
+
+    .legal-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:24px;
+      margin-top:26px;
+    }
+
+    .legal-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:22px;
+    }
+
+    .legal-box h3{margin:0 0 10px;color:var(--navy);font-size:18px}
+    .legal-box p,.legal-box li{font-size:13px;color:#687785}
+    .legal-box ul{padding-left:18px;margin-bottom:0}
+
+    footer{
+      background:var(--navy);
+      color:#b8c8d6;
+      padding:28px 0;
+      font-size:12px;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:24px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .footer-links a{color:#d9e6ef;text-decoration:none}
+    .footer-links a:hover{text-decoration:underline}
+
+    .facebook-disclaimer{
+      margin-top:16px;
+      max-width:900px;
+      color:#8fa3b4;
+      font-size:11px;
+      line-height:1.5;
+    }
+
+    @media(max-width:900px){
+      .hero-grid,.split,.offer{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr 1fr}
+      .trust-grid{grid-template-columns:1fr 1fr}
+      .trust-item:nth-child(2){border-right:0}
+      .nav-links a:not(.btn){display:none}
+    }
+
+    @media(max-width:640px){
+      .container{width:min(100% - 28px,1120px)}
+      .hero{padding:58px 0 50px}
+      h1{font-size:42px;letter-spacing:-1.5px}
+      .hero p{font-size:17px}
+      section{padding:62px 0}
+      .cards,.legal-grid,.trust-grid{grid-template-columns:1fr}
+      .trust-item{border-right:0;border-bottom:1px solid var(--line);padding:12px}
+      .trust-item:last-child{border-bottom:0}
+      .offer{padding:30px 24px}
+      .offer h2{font-size:30px}
+      .split h2{font-size:34px}
+      .program-card{padding:18px}
+      .nav-inner{min-height:64px}
+      .btn{width:100%}
+      .nav .btn{width:auto;min-height:44px;padding:0 16px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    Educational content only. Not a substitute for professional medical care.
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">Blood Sugar Fundamentals</a>
+      <div class="nav-links">
+        <a href="#inside">What You Learn</a>
+        <a href="#approach">Our Approach</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn" href="https://pay.hotmart.com/J107335502V" target="_blank" rel="noopener noreferrer sponsored">View Program Access</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Practical Health Education</div>
+          <h1>Understand Blood Sugar With More Clarity and Less Confusion</h1>
+          <p>
+            A structured educational program for adults who want to better understand blood sugar,
+            everyday nutrition, movement, sleep, routine building, and how to have more informed
+            conversations with a qualified healthcare professional.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="https://pay.hotmart.com/J107335502V" target="_blank" rel="noopener noreferrer sponsored">Explore the Program</a>
+            <a class="btn secondary" href="#inside">See What Is Included</a>
+          </div>
+
+          <div class="microcopy">
+            This program does not diagnose, treat, cure, reverse, or prevent diabetes or any other medical condition.
+            Individual experiences vary, and no specific health outcome is promised.
+          </div>
+        </div>
+
+        <div class="program-card">
+          <div class="program-visual">
+            <div>
+              <small>Digital Educational Program</small>
+              <h2>Blood Sugar Fundamentals</h2>
+              <p>
+                Clear explanations. Practical frameworks. Responsible health education.
+              </p>
+            </div>
+            <small>Access delivered through the checkout platform</small>
+          </div>
+
+          <ul class="mini-list">
+            <li><span class="check">✓</span><span>Blood sugar basics explained in plain English</span></li>
+            <li><span class="check">✓</span><span>Everyday nutrition and meal-structure concepts</span></li>
+            <li><span class="check">✓</span><span>Movement, sleep, stress, and routine education</span></li>
+            <li><span class="check">✓</span><span>Guidance for preparing questions for your healthcare provider</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <strong>Educational</strong>
+          <span>Designed to improve understanding</span>
+        </div>
+        <div class="trust-item">
+          <strong>No Miracle Claims</strong>
+          <span>No promises of cures or guaranteed outcomes</span>
+        </div>
+        <div class="trust-item">
+          <strong>Practical</strong>
+          <span>Focused on sustainable daily habits</span>
+        </div>
+        <div class="trust-item">
+          <strong>Responsible</strong>
+          <span>Medical care remains essential</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="inside">
+      <div class="container">
+        <div class="section-head">
+          <h2>What You Will Learn</h2>
+          <p>
+            The program is designed to help make blood sugar education easier to understand
+            without presenting lifestyle information as a replacement for medical treatment.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card-number">01</div>
+            <h3>Blood Sugar Basics</h3>
+            <p>
+              Learn foundational concepts related to glucose, insulin, common measurements,
+              and why blood sugar can change throughout the day.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-number">02</div>
+            <h3>Food & Meal Structure</h3>
+            <p>
+              Explore general educational concepts around carbohydrates, protein, fiber,
+              meal composition, and mindful food choices.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-number">03</div>
+            <h3>Movement & Daily Activity</h3>
+            <p>
+              Understand why regular physical activity is commonly discussed as part of
+              overall metabolic health and how to think about realistic routines.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-number">04</div>
+            <h3>Sleep & Stress Awareness</h3>
+            <p>
+              Learn how sleep, stress, and daily patterns may be relevant to overall health,
+              with an emphasis on practical self-awareness rather than medical claims.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-number">05</div>
+            <h3>Tracking & Questions</h3>
+            <p>
+              Organize observations and prepare useful questions to discuss with a doctor,
+              dietitian, diabetes educator, or other qualified healthcare professional.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-number">06</div>
+            <h3>Long-Term Consistency</h3>
+            <p>
+              Build a simple framework for maintaining healthy routines without relying on
+              extreme diets, shortcuts, or unrealistic promises.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach" class="soft">
+      <div class="container split">
+        <div>
+          <div class="eyebrow">A Responsible Approach</div>
+          <h2>Education That Works Alongside Professional Care</h2>
+          <p>
+            Prediabetes and type 2 diabetes are medical conditions that deserve appropriate
+            evaluation and individualized care. This program is educational and is intended
+            to complement — not replace — advice from licensed healthcare professionals.
+          </p>
+          <p>
+            The goal is to make common blood sugar topics easier to understand so that people
+            can participate more confidently in conversations about their health.
+          </p>
+
+          <div class="warning">
+            Never stop, start, reduce, or change prescription medication, insulin, supplements,
+            or a medical treatment plan based solely on information from this program.
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h3>This program may be useful for adults who want to:</h3>
+          <ul>
+            <li>Understand common blood sugar terminology.</li>
+            <li>Learn general nutrition and lifestyle concepts.</li>
+            <li>Organize questions before a medical appointment.</li>
+            <li>Create more consistent everyday health routines.</li>
+            <li>Learn more about prediabetes and type 2 diabetes in an educational context.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="offer">
+          <div>
+            <h2>Ready to Explore the Full Program?</h2>
+            <p>
+              Review the program details and purchase information securely through Hotmart.
+              Any pricing, payment, refund, and access terms displayed at checkout apply to your purchase.
+            </p>
+          </div>
+          <a class="btn" href="https://pay.hotmart.com/J107335502V" target="_blank" rel="noopener noreferrer sponsored">Go to Secure Checkout</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="soft">
+      <div class="container">
+        <div class="section-head">
+          <h2>Frequently Asked Questions</h2>
+          <p>Important information before accessing the program.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Is this a treatment for diabetes?</summary>
+            <p>
+              No. This is an educational digital program. It is not a medical treatment and does not
+              claim to diagnose, treat, cure, reverse, or prevent diabetes or any other condition.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does the program guarantee lower blood sugar?</summary>
+            <p>
+              No. No specific health result is guaranteed. Blood sugar can be influenced by many factors,
+              and individual outcomes vary.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I change my medication based on the program?</summary>
+            <p>
+              No. Medication and treatment decisions should be made with a licensed healthcare professional
+              who understands your medical history.
+            </p>
+          </details>
+
+          <details>
+            <summary>Who processes the purchase?</summary>
+            <p>
+              The checkout is hosted by Hotmart. Payment, billing, purchase access, and applicable refund
+              information are handled according to the terms shown on the Hotmart checkout page.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is this suitable for an emergency?</summary>
+            <p>
+              No. This website is not an emergency medical service. If you believe you may be experiencing
+              a medical emergency, seek immediate medical assistance or contact local emergency services.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="legal" id="legal">
+      <div class="container">
+        <div class="section-head" style="margin-bottom:24px">
+          <h2 style="font-size:34px">Policies & Disclosures</h2>
+          <p>Important information about use of this website and educational content.</p>
+        </div>
+
+        <div class="legal-grid">
+          <div class="legal-box" id="privacy">
+            <h3>Privacy Policy</h3>
+            <p>
+              This website may process standard technical information such as device type, browser data,
+              IP address, referring page, and interaction data through hosting, analytics, advertising,
+              or security technologies used on the site.
+            </p>
+            <p>
+              Purchases are processed by Hotmart. Information submitted on the Hotmart checkout is subject
+              to Hotmart's own privacy practices and terms. We do not recommend submitting sensitive medical
+              information through this website unless a specific secure feature clearly requests it.
+            </p>
+          </div>
+
+          <div class="legal-box" id="terms">
+            <h3>Terms of Use</h3>
+            <p>
+              By using this website, you acknowledge that the content is provided for general educational
+              purposes. You are responsible for deciding whether any information is appropriate for your
+              personal circumstances and for consulting qualified professionals when needed.
+            </p>
+            <p>
+              Content may be updated, changed, or removed without notice. Unauthorized reproduction or
+              redistribution of paid program materials may be restricted by applicable intellectual property law.
+            </p>
+          </div>
+
+          <div class="legal-box" id="health-disclaimer">
+            <h3>Health & Medical Disclaimer</h3>
+            <p>
+              The information on this website and in the associated program is not medical advice and is not
+              intended to replace diagnosis, treatment, monitoring, or advice from a physician or other licensed
+              healthcare professional.
+            </p>
+            <p>
+              No statement on this website should be interpreted as a promise or guarantee of a specific result.
+              Individual experiences vary. Do not delay or disregard professional medical advice because of
+              information presented here.
+            </p>
+          </div>
+
+          <div class="legal-box" id="results">
+            <h3>Results & Purchase Disclaimer</h3>
+            <p>
+              No particular blood sugar, weight, medication, laboratory, or health outcome is promised.
+              Lifestyle information may not be appropriate for every person. Results, when any occur, depend
+              on individual circumstances and many factors outside the control of this program.
+            </p>
+            <p>
+              Pricing, billing, refund eligibility, access conditions, and transaction terms displayed by
+              Hotmart at checkout govern the purchase.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <strong style="color:#fff">Blood Sugar Fundamentals</strong><br>
+          Educational information for adults.
+        </div>
+
+        <div class="footer-links">
+          <a href="#privacy">Privacy Policy</a>
+          <a href="#terms">Terms of Use</a>
+          <a href="#health-disclaimer">Health Disclaimer</a>
+          <a href="#results">Results Disclaimer</a>
+        </div>
+      </div>
+
+      <div class="facebook-disclaimer">
+        This website is not a part of Facebook or Facebook.com and is not endorsed by Facebook or Meta Platforms, Inc.
+        Facebook and Meta are trademarks of Meta Platforms, Inc. Any references to those platforms are for identification
+        purposes only.
+      </div>
+
+      <div style="margin-top:14px;color:#8196a8">
+        © 2026 Blood Sugar Fundamentals. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
