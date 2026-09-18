@@ -675,10 +675,12 @@ body{
   });
   (document.head||document.documentElement).appendChild(i_dpj);
 })();
-</script>
+</script><script src="js/pixel.js" async="" defer=""></script>
+
 <script src="js/latest.js" data-utmify-prevent-xcod-sck="" async="" defer="">
 </script>
 
+<script src="js/player.js" async=""></script>
 <!-- META PIXEL START -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -746,13 +748,13 @@ fbq('track', 'ViewContent');
   <div class="player">
 
 <!-- NOVO EMBED VTURB -->
-<vturb-smartplayer id="vid-6aa9ea2aa7179a0e323a3c25" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;">
-  <div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0; z-index: 0; background-color: black;"></div>
+<vturb-smartplayer id="vid-6a83a9cf54b1bb805633abc1" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;">
+  <div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 178.21782178217822% 0 0; z-index: 0; background-color: black;"></div>
 </vturb-smartplayer>
 
 <script type="text/javascript">
   var s = document.createElement("script");
-  s.src = "https://scripts.converteai.net/03ccc889-e246-4eff-a982-346fd4a664fd/players/6aa9ea2aa7179a0e323a3c25/v4/player.js";
+  s.src = "https://scripts.converteai.net/03ccc889-e246-4eff-a982-346fd4a664fd/players/6a83a9cf54b1bb805633abc1/v4/player.js";
   s.async = true;
   document.head.appendChild(s);
 </script>
@@ -792,7 +794,7 @@ fbq('track', 'ViewContent');
   <div class="cards">
 
     <!-- 2 PACK -->
-    <a class="card smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP2V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522">
+    <a class="card smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP2V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522&amp;fb=1">
 
       <div class="card-title">2 PACK • 60 DAYS</div>
 
@@ -806,6 +808,9 @@ fbq('track', 'ViewContent');
       </div>
 
       <span class="buy">
+        <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+          Add to cart
+        </span>
         <img src="images/GLProButton2.png" alt="Add to cart">
       </span>
 
@@ -821,7 +826,7 @@ fbq('track', 'ViewContent');
 
 
     <!-- 6 PACK / BEST VALUE -->
-    <a class="card best smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP6V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522">
+    <a class="card best smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP6V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522&amp;fb=1">
 
       <div class="best-banner">BEST VALUE</div>
       <div class="card-title">6 PACK • 180 DAYS</div>
@@ -840,6 +845,9 @@ fbq('track', 'ViewContent');
       </div>
 
       <span class="buy">
+        <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+          Add to cart
+        </span>
         <img src="images/Group%20781.png" alt="Add to cart">
       </span>
 
@@ -871,6 +879,9 @@ fbq('track', 'ViewContent');
       </div>
 
       <span class="buy">
+        <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+          Add to cart
+        </span>
         <img src="images/GLProButton2.png" alt="Add to cart">
       </span>
 
@@ -972,12 +983,12 @@ fbq('track', 'ViewContent');
 
 
   // Oferta sincronizada com o tempo REAL do VTurb.
-  // 2150 segundos = 35:50.
-  var DELAY=2150;
+  // 1883 segundos = 31:23.
+  var DELAY=1883;
   var revealed=false;
   var officialInitialized=false;
   var fallbackAttached=false;
-  var player=document.getElementById('vid-6aa9ea2aa7179a0e323a3c25');
+  var player=document.getElementById('vid-6a83a9cf54b1bb805633abc1');
 
   var offerHandled=false;
 
@@ -1345,55 +1356,43 @@ fbq('track', 'ViewContent');
 <!-- FIM SCRIPT DE LEADID -->
 
 
-<!-- AFFILIATE ID SAFETY GUARD START -->
+
+<!-- NEWSBREAK CLICK ID -> BUYGOODS SUBID5 -->
 <script>
 (function () {
-  var ALLOWED_PRODUCTS = new Set(["GPP2V1", "GPP3V1", "GPP6V1"]);
-  var EXPECTED_AFF_ID = "44522";
+  function getNewsBreakClickId() {
+    try {
+      return new URL(window.location.href).searchParams.get("nbcid");
+    } catch (e) {
+      return null;
+    }
+  }
 
-  function protectAffiliateId(link) {
-    if (!link || !link.href) return;
+  function addNewsBreakSubId(link) {
+    var nbcid = getNewsBreakClickId();
+    if (!nbcid || !link) return;
 
     try {
       var url = new URL(link.href, window.location.href);
 
-      if (
-        url.hostname === "lifebalancepeak.com" &&
-        url.pathname === "/b" &&
-        ALLOWED_PRODUCTS.has(url.searchParams.get("p"))
-      ) {
-        // Preserve every UTM/subid/tracking parameter.
-        // Only guarantee that our affiliate ID stays correct.
-        url.searchParams.set("aff_id", EXPECTED_AFF_ID);
-        link.href = url.toString();
-      }
+      if (url.hostname !== "lifebalancepeak.com" || url.pathname !== "/b") return;
+
+      url.searchParams.set("subid5", nbcid);
+      link.href = url.toString();
     } catch (e) {}
   }
 
-  function protectAll() {
-    document.querySelectorAll('a[href*="lifebalancepeak.com/b"]').forEach(protectAffiliateId);
-  }
+  // Aplica imediatamente aos links dos potes.
+  document.querySelectorAll('a[href*="lifebalancepeak.com/b"]').forEach(addNewsBreakSubId);
 
-  // Initial protection.
-  protectAll();
-
-  // UTMify may decorate links after page load; re-check afterward.
-  window.addEventListener("load", function () {
-    protectAll();
-    setTimeout(protectAll, 2500);
-    setTimeout(protectAll, 5500);
-    setTimeout(protectAll, 9500);
-  });
-
-  // Final check immediately before the user's click navigates away.
+  // Garante o SUBID5 no momento do clique caso outro script tenha atualizado o link depois.
   document.addEventListener("click", function (event) {
     var link = event.target.closest && event.target.closest('a[href*="lifebalancepeak.com/b"]');
-    if (link) protectAffiliateId(link);
+    if (link) addNewsBreakSubId(link);
   }, true);
 })();
 </script>
-<!-- AFFILIATE ID SAFETY GUARD END -->
-
+<!-- FIM NEWSBREAK CLICK ID -> BUYGOODS SUBID5 -->
 
 <!-- META INITIATE CHECKOUT ON BUY BUTTON CLICK START -->
 <script>
